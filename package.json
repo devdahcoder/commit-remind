@@ -1,0 +1,95 @@
+{
+	"name": "commit-remind",
+	"displayName": "Commit Remind",
+	"description": "Reminds developers to commit code after reaching milestones",
+	"version": "1.0.0",
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "commitRemind.resetCounters",
+				"title": "Reset Commit Counters",
+				"category": "Commit Remind"
+			},
+			{
+				"command": "commitRemind.showStatus",
+				"title": "Show Current Status",
+				"category": "Commit Remind"
+			},
+			{
+				"command": "commitRemind.commitNow",
+				"title": "Commit Changes Now",
+				"category": "Commit Remind"
+			}
+		],
+		"configuration": {
+			"title": "Commit Remind",
+			"properties": {
+				"commitRemind.linesThreshold": {
+					"type": "number",
+					"default": 200,
+					"description": "Number of modified lines before showing commit reminder"
+				},
+				"commitRemind.filesThreshold": {
+					"type": "number",
+					"default": 3,
+					"description": "Number of modified files before showing commit reminder"
+				},
+				"commitRemind.enableLineTracking": {
+					"type": "boolean",
+					"default": true,
+					"description": "Track line changes for commit reminders"
+				},
+				"commitRemind.enableFileTracking": {
+					"type": "boolean",
+					"default": true,
+					"description": "Track file changes for commit reminders"
+				},
+				"commitRemind.timeThreshold": {
+					"type": "number",
+					"default": 60,
+					"description": "Minutes since last commit before showing time-based reminder"
+				},
+				"commitRemind.enableTimeTracking": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable time-based commit reminders"
+				},
+				"commitRemind.excludePatterns": {
+					"type": "array",
+					"default": [
+						"**/*.log",
+						"**/node_modules/**",
+						"**/.git/**",
+						"**/dist/**",
+						"**/build/**"
+					],
+					"description": "File patterns to exclude from tracking"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"devDependencies": {
+		"@types/node": "^16.18.126",
+		"@types/vscode": "^1.103.0",
+		"typescript": "^4.9.5"
+	}
+}
